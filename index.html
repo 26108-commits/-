@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>비틀하우스 (Beetle House) | 곤충 전문 브리딩 쇼핑몰</title>
+  <meta name="description" content="혈통 사슴벌레, 대형 장수풍뎅이, 프리미엄 발효톱밥 및 곤충 사육용품 전문 쇼핑몰 (학습용 프로젝트)">
+  <!-- 스타일시트 -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- 파비콘 이모지 -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪲</text></svg>">
+</head>
+<body>
+
+  <!-- 생물 배송 안전 공지 바 -->
+  <div class="shipping-alert-bar">
+    <div class="container">
+      <span>⚠️ 생체 안전 배송</span>
+      목요일 오후 ~ 일요일 및 공휴일 전날은 생체 폐사 방지를 위해 발송되지 않으며, 월요일에 일괄 안심 출고됩니다.
+    </div>
+  </div>
+
+  <!-- 사이트 헤더 -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo" id="logoBtn">
+        <span class="logo-icon">🪲</span>
+        <strong>BEETLE HOUSE</strong>
+        <span>비틀하우스</span>
+      </a>
+
+      <div class="header-actions">
+        <!-- 다크/라이트 모드 토글 -->
+        <button id="themeToggleBtn" class="btn-icon" title="테마 전환" aria-label="테마 전환">
+          <span id="themeIcon">🌙</span>
+        </button>
+
+        <!-- 장바구니 버튼 -->
+        <button id="cartBtn" class="btn-icon" title="장바구니 열기" aria-label="장바구니 열기">
+          🛒
+          <span id="cartCountBadge" class="cart-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 히어로 섹션 -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <div class="hero-tag">BREEDING & SPECIMEN LAB</div>
+      <h1 class="hero-title">자연의 신비를 담은 <em>반려곤충</em> & 사육 전문점</h1>
+      <p class="hero-desc">
+        체계적인 누대 관리로 우화한 최상급 혈통 사슴벌레부터 대형 장수풍뎅이, 프리미엄 사육 매트까지 만나보세요.
+      </p>
+      <div class="hero-badges">
+        <div class="hero-badge-item">🛡️ 100% 사착 보상제</div>
+        <div class="hero-badge-item">📦 계절 맞춤 2중 안심 포장</div>
+        <div class="hero-badge-item">📏 정밀 디지털 버니어 측정</div>
+        <div class="hero-badge-item">🌿 100% 무독성 발효 매트</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 메인 필터 및 검색 컨트롤러 -->
+  <main class="container">
+    <section class="filter-section">
+      <div class="search-filter-card">
+        <!-- 1행: 검색창 및 정렬 -->
+        <div class="search-row">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="곤충 이름, 학명 또는 용품 검색 (예: 왕사슴, 톱밥, 젤리)...">
+          </div>
+          <select id="sortSelect" class="sort-select">
+            <option value="featured">추천순</option>
+            <option value="size-desc">크기 큰 순 (mm ▼)</option>
+            <option value="size-asc">크기 작은 순 (mm ▲)</option>
+            <option value="price-asc">가격 낮은 순</option>
+            <option value="price-desc">가격 높은 순</option>
+          </select>
+        </div>
+
+        <!-- 2행: 카테고리 탭 버튼 -->
+        <div class="category-tabs" id="categoryTabs">
+          <button class="tab-btn active" data-category="all">전체보기</button>
+          <button class="tab-btn" data-category="stag-beetle">사슴벌레류</button>
+          <button class="tab-btn" data-category="rhino-beetle">장수풍뎅이류</button>
+          <button class="tab-btn" data-category="supplies">사육용품/먹이</button>
+          <button class="tab-btn" data-category="specimen">표본/기타</button>
+        </div>
+
+        <!-- 3행: 세부 필터 (생체 크기 슬라이더, 성별 필터, 리셋) -->
+        <div class="sub-filters">
+          <!-- 크기 슬라이더 필터 -->
+          <div class="slider-group">
+            <span class="slider-label">최소 크기 필터:</span>
+            <input type="range" id="sizeRangeSlider" class="size-range-slider" min="30" max="90" step="1" value="30">
+            <span id="sizeSliderValue" class="slider-value">전체</span>
+          </div>
+
+          <!-- 성별 셀렉트 -->
+          <div class="gender-filter-group">
+            <label for="genderSelect" class="slider-label">성별:</label>
+            <select id="genderSelect" class="gender-select">
+              <option value="all">전체 성별</option>
+              <option value="수컷">수컷</option>
+              <option value="암컷">암컷</option>
+              <option value="한 쌍(페어)">한 쌍(페어)</option>
+            </select>
+          </div>
+
+          <!-- 필터 초기화 버튼 -->
+          <button id="resetFilterBtn" class="btn-reset-filter">↺ 필터 초기화</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 상품 카탈로그 섹션 -->
+    <section>
+      <div class="catalog-header">
+        <h2 class="result-count">분양 및 판매 상품 <span id="productCount">0</span>개</h2>
+      </div>
+
+      <!-- 상품 카드 렌더링 컨테이너 -->
+      <div id="productsGrid" class="products-grid">
+        <!-- 자바스크립트에 의해 동적으로 카드가 렌더링됩니다 -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================
+       개체 상세 팝업 모달 (Quick View)
+       ========================================================== -->
+  <div id="detailModalBackdrop" class="modal-backdrop">
+    <div class="modal-content">
+      <button id="closeDetailModalBtn" class="modal-close-btn" aria-label="닫기">✕</button>
+      <div class="modal-layout">
+        <div class="modal-img-wrap">
+          <img id="modalImg" src="" alt="곤충 사진" class="modal-img">
+        </div>
+        <div class="modal-info">
+          <span id="modalCategory" class="card-category"></span>
+          <h2 id="modalTitle" class="modal-title"></h2>
+          <div id="modalScientific" class="modal-scientific"></div>
+          <p id="modalDesc" class="modal-desc"></p>
+
+          <!-- 생체 스펙 상세 표 -->
+          <table class="spec-table">
+            <tbody>
+              <tr id="specSizeRow">
+                <th>개체 크기</th>
+                <td id="modalSpecSize"></td>
+              </tr>
+              <tr>
+                <th>구분 / 성별</th>
+                <td id="modalSpecGender"></td>
+              </tr>
+              <tr>
+                <th>혈통 / 누대</th>
+                <td id="modalSpecLineage"></td>
+              </tr>
+              <tr>
+                <th>산지 (Origin)</th>
+                <td id="modalSpecOrigin"></td>
+              </tr>
+              <tr>
+                <th>우화일</th>
+                <td id="modalSpecEmerged"></td>
+              </tr>
+              <tr>
+                <th>섭식 상태</th>
+                <td id="modalSpecFeeding"></td>
+              </tr>
+              <tr>
+                <th>권장 사육온도</th>
+                <td id="modalSpecTemp"></td>
+              </tr>
+              <tr>
+                <th>사육 난이도</th>
+                <td id="modalSpecDifficulty"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- 계절 맞춤 안심 배송 옵션 -->
+          <div class="season-options-box">
+            <div class="season-option-title">📦 계절 맞춤 안심 보온/보냉 옵션 선택</div>
+            <label class="option-checkbox-row">
+              <span>❄️ 동절기 안심 보온 포장 (핫팩 + 보온재)</span>
+              <input type="checkbox" id="winterPackOpt" value="1000">
+            </label>
+            <label class="option-checkbox-row" style="margin-top: 6px;">
+              <span>☀️ 하절기 안심 보냉 포장 (아이스팩 + 통기)</span>
+              <input type="checkbox" id="summerPackOpt" value="1000">
+            </label>
+          </div>
+
+          <div class="modal-price-action">
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">총 합계 금액</div>
+              <div id="modalTotalPrice" class="modal-price-display">0원</div>
+            </div>
+            <button id="modalAddToCartBtn" class="btn-modal-add">장바구니 담기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================
+       장바구니 슬라이드 드로어 (Side Cart Drawer)
+       ========================================================== -->
+  <div id="cartDrawerBackdrop" class="cart-drawer-backdrop">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3 class="cart-title">🛒 내 사육 장바구니</h3>
+        <button id="closeCartBtn" class="modal-close-btn" style="position: static;" aria-label="닫기">✕</button>
+      </div>
+
+      <div id="cartItemList" class="cart-body">
+        <!-- 자바스크립트로 장바구니 아이템이 렌더링됩니다 -->
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-summary-row">
+          <span>상품 금액</span>
+          <span id="cartSubtotal">0원</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>배송비 (5만원 이상 무료)</span>
+          <span id="cartShippingFee">3,500원</span>
+        </div>
+        <div class="cart-summary-row total">
+          <span>최종 결제 금액</span>
+          <span id="cartTotal">0원</span>
+        </div>
+        <button id="checkoutBtn" class="btn-checkout">주문서 작성하기 (모의 결제)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================
+       모의 주문서 및 가상 영수증 모달
+       ========================================================== -->
+  <div id="orderModalBackdrop" class="modal-backdrop">
+    <div class="modal-content order-modal-content">
+      <button id="closeOrderModalBtn" class="modal-close-btn" aria-label="닫기">✕</button>
+      
+      <!-- 1단계: 배송지 작성 폼 -->
+      <div id="orderFormStep">
+        <div class="order-modal-header">
+          <h2>📝 모의 주문서 작성</h2>
+          <p style="color: var(--text-muted); font-size: 0.88rem;">실제 결제는 발생하지 않는 학습 시뮬레이션입니다.</p>
+        </div>
+
+        <div class="shipping-warning-note">
+          <span>⚠️</span>
+          <div>
+            <strong>생물 안전 직송 안내</strong><br>
+            택배 기사님께 '경비실 보관 금지, 문 앞 배송'을 당부하는 메모가 기본 추가됩니다.
+          </div>
+        </div>
+
+        <form id="mockOrderForm">
+          <div class="form-group">
+            <label class="form-label">받는 사람 성함</label>
+            <input type="text" id="orderName" class="form-input" placeholder="홍길동" required value="김충우">
+          </div>
+          <div class="form-group">
+            <label class="form-label">연락처</label>
+            <input type="tel" id="orderPhone" class="form-input" placeholder="010-0000-0000" required value="010-1234-5678">
+          </div>
+          <div class="form-group">
+            <label class="form-label">배송지 주소</label>
+            <input type="text" id="orderAddress" class="form-input" placeholder="도로명 주소 입력" required value="서울특별시 마포구 월드컵북로 123 (비틀아파트)">
+          </div>
+          <div class="form-group">
+            <label class="form-label">배송 요청사항</label>
+            <input type="text" id="orderMemo" class="form-input" value="[생물] 파손주의! 꼭 당일 문 앞 직송 부탁드립니다.">
+          </div>
+          <div class="form-group">
+            <label class="form-label">모의 결제 수단</label>
+            <select class="form-input" id="orderPaymentMethod">
+              <option value="test-card">가상 신용카드 (테스트 1초 승인)</option>
+              <option value="test-transfer">가상 무통장 입금 (즉시 확인)</option>
+              <option value="test-pay">가상 간편결제 (카카오/네이버페이)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-checkout" style="margin-top: 10px;">
+            <span id="orderSubmitTotal">0원</span> 모의 결제 완료하기
+          </button>
+        </form>
+      </div>
+
+      <!-- 2단계: 모의 주문 완료 가상 영수증 (결제 완료 시 표시) -->
+      <div id="receiptStep" style="display: none;">
+        <div class="receipt-card">
+          <div class="receipt-icon">🎉</div>
+          <h2 style="font-size: 1.4rem; margin-bottom: 6px;">주문이 성공적으로 접수되었습니다!</h2>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px;">개체의 상태를 최종 검역한 후 안전하게 포장하여 보내드립니다.</p>
+          <div class="receipt-number">주문번호: <span id="receiptOrderNo">BH-20260907-001</span></div>
+
+          <div class="receipt-details-list">
+            <div class="receipt-row">
+              <span style="color: var(--text-muted);">수령인</span>
+              <strong id="receiptName">-</strong>
+            </div>
+            <div class="receipt-row">
+              <span style="color: var(--text-muted);">배송 주소</span>
+              <span id="receiptAddress" style="max-width: 250px; text-align: right;">-</span>
+            </div>
+            <div class="receipt-row">
+              <span style="color: var(--text-muted);">예상 출고일</span>
+              <strong style="color: var(--primary);">안전 발송일 (다음 주 월요일)</strong>
+            </div>
+            <div class="receipt-row" style="margin-top: 10px; border-top: 1px dashed var(--border); padding-top: 8px;">
+              <span>최종 결제액</span>
+              <strong id="receiptTotal" style="color: var(--primary); font-size: 1.1rem;">0원</strong>
+            </div>
+          </div>
+
+          <div class="guarantee-badge">
+            🌿 <strong>비틀하우스 안심 보장:</strong> 개봉 시 촬영된 영상 제출 시 100% 재발송 또는 환불 보상
+          </div>
+
+          <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <button id="closeReceiptBtn" class="btn-detail" style="flex: 1;">쇼핑 계속하기</button>
+            <button onclick="window.print()" class="btn-add-cart" style="flex: 1;">영수증 출력</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 토스트 알림 컨테이너 -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- 푸터 -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-title">🪲 비틀하우스 (BEETLE HOUSE)</div>
+          <p>국내 자생 사슴벌레, 장수풍뎅이 혈통 브리딩 및 전문 사육 용품 쇼핑몰</p>
+          <div class="footer-school-badge">🎓 학교 과제 및 웹 프로그래밍 학습용 데모 프로젝트</div>
+        </div>
+        <div>
+          <div class="footer-title">고객 센터 & 폐사 보상 안내</div>
+          <p>운영 시간: 평일 10:00 ~ 17:00</p>
+          <p>사착(폐사) 접수: 수령 당일 미개봉 영상 첨부 필수</p>
+          <p>생물 발송 요일: 월, 화, 수 (목/금/주말 제외)</p>
+        </div>
+        <div>
+          <div class="footer-title">학습용 기술 스택</div>
+          <p>• HTML5 Semantic Tags</p>
+          <p>• Modern CSS3 (Variables, Grid)</p>
+          <p>• Vanilla JavaScript (ES6+)</p>
+          <p>• 브라우저 LocalStorage 상태 관리</p>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2026 Beetle House. Educational Project. All images for demonstration purposes.
+      </div>
+    </div>
+  </footer>
+
+  <!-- 스크립트 연결 -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
